@@ -91,31 +91,32 @@ After the initial 100 iterations using the above control logic, a machine learni
 
 ##### Custom Loss Function
 
-The custom loss function $L$ used during training is defined as follows:
+The custom loss function \(L\) used during training is defined as follows:
 
-$$L = \text{MSE}(f_\text{pred}, f_\text{true}) + \frac{1}{n} \sum_{i=1}^{n} \left[ P_\text{noise}(n_i) + P_\text{temp}(t_i) \right]$$
+L = MSE(f_pred, f_true) + (1/n) * sum( P_noise(n_i) + P_temp(t_i) for i=1 to n)
 
 Where:
+- `f_pred` is the predicted fan speed.
+- `f_true` is the actual fan speed.
+- `P_noise(n_i)` is the penalty for noise, defined as:
 
-* $f_\text{pred}$ is the predicted fan speed.
-* $f_\text{true}$ is the actual fan speed.
-* $P_\text{noise}(n_i)$ is the penalty for noise, defined as:
+P_noise(n_i) =
 
-$$P_\text{noise}(n_i) = \begin{cases} 200 & \text{if } n_i < 0.5 \\ 1 & \text{otherwise} \end{cases}$$
+	•	200 if n_i < 0.5
+	•	1 otherwise
+
+- `P_temp(t_i)` is the penalty for temperature, defined as:
+
+P_temp(t_i) =
+
+	•	200 if t_i < 50°C
+	•	1 otherwise
 
 * $P_\text{temp}(t_i)$ is the penalty for temperature, defined as:
 
-$$P_\text{temp}(t_i) = \begin{cases} 200 & \text{if } t_i < 50^\circ C \\ 1 & \text{otherwise} \end{cases}$$
-
-$$P_\text{noise}(n_i) = \begin{cases} 10 \times (n_i - 55)^2 & \text{if } n_i > 55 \\ 0 & \text{otherwise} \end{cases}$$
-
-* $P_\text{temp}(t_i)$ is the penalty for temperature, defined as:
-
-$$P_\text{temp}(t_i) = \begin{cases} 20 \times (t_i - 85)^2 & \text{if } t_i > 85 \\ 0 & \text{otherwise} \end{cases}$$
-
-* $n_i$ is the predicted noise level in dB.
-* $t_i$ is the predicted temperature in °C.
-* $n$ is the number of predictions.
+- `n_i` is the predicted noise level in dB.
+- `t_i` is the predicted temperature in °C.
+- `n` is the number of predictions.
 
 ## Getting Started
 
