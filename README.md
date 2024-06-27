@@ -32,6 +32,7 @@
     <a href="https://github.com/tingrubato/quiet-cool/issues/new?labels=enhancement&template=feature-request
 
 <!-- TABLE OF CONTENTS -->
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -59,6 +60,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 Quiet Cool is a server application designed to control GPU fan speeds based on temperature readings. It dynamically adjusts fan speeds to optimize hardware performance and longevity. Below is a figure that shows how it works and you can find the live version [here](https://app.terrastruct.com/diagrams/1382878080). Source code for the figure is available [here](misc/quiet-cool/misc/diagram.d2).
@@ -80,6 +82,7 @@ The script in this project will take over the fan control of your homelab server
 * **Logging and Monitoring**: Logs detailed information about temperature readings, fan speed adjustments, and system errors.
 
 ### Tested on:
+
 * **Dell PowerEdge R720**: A server with a GPU passed through to an ubuntu 22.04 VM.
 
 ### Mathematical Model
@@ -122,9 +125,10 @@ $$P_\text{temp}(t_i) = \begin{cases} 20 \times (t_i - 85)^2 & \text{if } t_i > 8
 * $n_i$ is the predicted noise level in dB.
 * $t_i$ is the predicted temperature in °C.
 * $n$ is the number of predictions.
+---------------
 
 #### Getting Started
----------------
+
 ### Prerequisites
 
 #### On your Flask Server Machine:
@@ -231,7 +235,7 @@ This project is available under the MIT License. See [LICENSE.md](LICENSE.md) fo
 
 For any questions or collaborations, feel free to reach out via email:
 
-- **Ting Xia**
+- **T.X**
   - 📧 Email: [tingrubato@outlook.com](mailto:tingrubato@outlook.com)
 
 <!-- ACKNOWLEDGMENTS -->
