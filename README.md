@@ -1,5 +1,3 @@
-
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 <!--
 *** Thanks for checking out the Quiet Cool: Intelligent GPU Fan Speed Control. If you have a suggestion
@@ -9,30 +7,22 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<p align="center">
   <a href="https://github.com/tingrubato/quiet-cool">
     <img src="misc/logo.png" alt="Logo" width="80" height="80">
   </a>
+</p>
 
-  <h3 align="center">Quiet Cool: IPMIntellegent GPU Fan Speed Control</h3>
 
-  <p align="center">
-    A server application designed to control GPU fan speeds based on temperature readings and machine learning. This is able to dynamically adjust fan speeds to optimize hardware performance and longevity, especially when you are using a GPU that is not supported by the vendor for fan control, like using customer level GPU on a enterprise level server.
-    <br />
-    <a href="https://github.com/tingrubato/quiet-cool"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/tingrubato/quiet-cool">View Demo</a>
-    ·
-    <a href="https://github.com/tingrubato/quiet-cool/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/tingrubato/quiet-cool/issues/new?labels=enhancement&template=feature-request
+<h3>Quiet Cool: Intelligent GPU Fan Speed Control</h3>
+
+<p>
+  A server application designed to control GPU fan speeds based on temperature readings and machine learning. This is able to dynamically adjust fan speeds to optimize hardware performance and longevity, especially when you are using a GPU that is not supported by the vendor for fan control, like using customer level GPU on a enterprise level server.
+</p>
 
 <!-- TABLE OF CONTENTS -->
-
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -60,7 +50,6 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
 Quiet Cool is a server application designed to control GPU fan speeds based on temperature readings. It dynamically adjusts fan speeds to optimize hardware performance and longevity. Below is a figure that shows how it works and you can find the live version [here](https://app.terrastruct.com/diagrams/1382878080). Source code for the figure is available [here](misc/quiet-cool/misc/diagram.d2).
@@ -73,6 +62,7 @@ Quiet Cool is a server application designed to control GPU fan speeds based on t
 </iframe>
 
 ## Disclaimer
+
 The script in this project will take over the fan control of your homelab server. Brace yourself for a wild ride! Just remember, with great power comes great responsibility... and the potential for some seriously cool airflow. But hey, I must warn you, this operation is like riding a rollercoaster blindfolded. It's a risky adventure that could leave your hardware feeling a bit shaken, not stirred. So, buckle up, hold on tight, and use this script at your own risk. I take no responsibility for any unexpected fan-induced windstorms or hardware mishaps. Happy fan-controlling! 🌪️💨
 
 ### Key Features
@@ -93,6 +83,7 @@ The initial control logic is defined as a mathematical function:
 
 <p align="center">
 <img src="https://latex.codecogs.com/svg.latex?f(t)=\begin{cases}10&\text{if%20}t<40^\circ%20C\\20&\text{if%20}40^\circ%20C\leq%20t<45^\circ%20C\\30&\text{if%20}45^\circ%20C\leq%20t<50^\circ%20C\\40&\text{if%20}50^\circ%20C\leq%20t<55^\circ%20C\\50&\text{if%20}t\geq%2055^\circ%20C\end{cases}" alt="Initial Control Logic"/>
+
 
 #### Machine Learning Model
 
@@ -125,9 +116,8 @@ $$P_\text{temp}(t_i) = \begin{cases} 20 \times (t_i - 85)^2 & \text{if } t_i > 8
 * $n_i$ is the predicted noise level in dB.
 * $t_i$ is the predicted temperature in °C.
 * $n$ is the number of predictions.
----------------
 
-#### Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -136,20 +126,19 @@ $$P_\text{temp}(t_i) = \begin{cases} 20 \times (t_i - 85)^2 & \text{if } t_i > 8
 * - flask
 * - numpy
 * - pandas
-* - tensorflow(up to what you have on the machine that runs the flask server)
+* - tensorflow (up to what you have on the machine that runs the flask server)
 
 #### On your GPU-Passed-Through Machine:
 * `nvidia-smi` command-line utility on your GPU-Passed-Through machine
 * `curl` command-line utility on your GPU-Passed-Through machine to post GPU temperature to the fan control flask server.
-
 
 ### Installation
 
 1. **Clone the Repository**
 
 ```bash
-    git clone https://github.com/yourusername/quiet-cool.git
-    cd quiet-cool
+git clone https://github.com/yourusername/quiet-cool.git
+cd quiet-cool
 ```
 
 2. **Set Up Python Environment**
@@ -157,15 +146,15 @@ $$P_\text{temp}(t_i) = \begin{cases} 20 \times (t_i - 85)^2 & \text{if } t_i > 8
 You really should use a virtual environment to avoid conflicts with other Python projects. Here's how to set up a virtual environment using `venv`:
 
 ```bash
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 3. **Run the Server**
 
 ```bash
-    python fan_control_server.py
+python fan_control_server.py
 ```
 
 <!-- USAGE EXAMPLES -->
@@ -180,14 +169,14 @@ Use the script `monitor_gpu_temp.sh` to send GPU temperatures to the server:
 REMOTE_ADDRESS="http://your_flask_server:23333"  # Replace with your remote machine's address
 
 get_gpu_temp() {
-        nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits
+    nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits
 }
 
 while true; do
-        TEMP=$(get_gpu_temp)
-        echo "GPU Temperature: $TEMP°C"
-        curl -X POST -d "temperature=$TEMP" $REMOTE_ADDRESS/gpu-temperature
-        sleep 10
+    TEMP=$(get_gpu_temp)
+    echo "GPU Temperature: $TEMP°C"
+    curl -X POST -d "temperature=$TEMP" $REMOTE_ADDRESS/gpu-temperature
+    sleep 10
 done
 ```
 
@@ -200,11 +189,11 @@ done
 - **Response**: `200 OK` - fan speed adjusted.
 
 <!-- FUTURE WORK -->
-
 ## Future Work
+
 - [ ] Remodel the noise level calculation to include more factors by diving deeper into the specifics of the fan module.
-- [⏳] Research on the possiblity of using different fan speed control Mode. E.g. quiet mode, performance mode, responsive mode etc.
-- [ ] Start the frontend user interface development to allow user to modify settings and add some observability to the user interface. (I just kick started node.js courses and let's see how long will it take.)
+- [⏳] Research on the possiblity of using different fan speed control modes. E.g. quiet mode, performance mode, responsive mode, etc.
+- [ ] Start the frontend user interface development to allow user to modify settings and add some observability to the user interface. (I just kick started node.js courses and let's see how long it will take.)
 - [ ] Support more Machines.
 
 <!-- KNOWN ISSUES -->
@@ -218,7 +207,7 @@ The current noise level calculation is based on a simplified model and may not a
 
 Currently, the penalization of noise and temperature is based on a simplified quadratic function. However, this approach may not accurately capture the real-world impact of noise and temperature on user experience and hardware longevity. At the moment, my focus is on timely adjustments, which is why the penalization is set to be somewhat aggressive. In future versions, I plan to refine these models based on more detailed research and valuable user feedback.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p><a href="#readme-top">back to top</a></p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -235,8 +224,7 @@ This project is available under the MIT License. See [LICENSE.md](LICENSE.md) fo
 
 For any questions or collaborations, feel free to reach out via email:
 
-- **T.X**
-  - 📧 Email: [tingrubato@outlook.com](mailto:tingrubato@outlook.com)
+- **T.X** : 📧 Email: [tingrubato@outlook.com](mailto:tingrubato@outlook.com)
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
@@ -244,4 +232,4 @@ For any questions or collaborations, feel free to reach out via email:
 * [serverManager](https://github.com/Danielv123/serverManager)
 * [d2lang](https://d2lang.com)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p><a href="#readme-top">back to top</a></p>
