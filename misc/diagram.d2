@@ -1,0 +1,93 @@
+title: {
+  label: Adaptive Fan Speed Control Logic Based on GPU Temperature
+  near: bottom-center
+  shape: text
+  style.font-size: 37
+  style.underline: true
+  top: 619
+  left: 0
+  width: 1343
+  height: 51
+}
+
+GPU Machine: {
+  icon: https://icons.terrastruct.com/essentials%2F112-server.svg
+  top: 481
+  left: 155
+  style.3d: true
+  style.shadow: true
+}
+Fan Control Server: {
+  icon: https://icons.terrastruct.com/dev%2Flinux.svg
+  top: 137
+  left: 545
+  style.3d: true
+  style.shadow: true
+  style.italic: true
+  style.font-color: "#0A0F25"
+  style.fill: "#FFFFFF"
+  label.near: bottom-center
+}
+Data Storage: {
+  icon: https://icons.terrastruct.com/infra%2F011-data-storage.svg
+  top: 0
+  left: 1042
+}
+iDrac: {
+  icon: https://icons.terrastruct.com/infra%2F019-network.svg
+  top: 473
+  left: 595
+  style.3d: true
+  style.shadow: true
+}
+Fans Module: {
+  icon: https://icons.terrastruct.com/tech%2F009-cooler.svg
+  top: 473
+  left: 1022
+  style.3d: true
+  style.shadow: true
+}
+
+GPU Machine -> Fan Control Server: sendGPUTemperature() {style.font-size: 26}
+
+Fan Control Server -> Fan Control Server: checkIterationCount() {
+  style.stroke: "#f68e39"
+  style.stroke-dash: 3
+  style.font-size: 24
+}
+
+Fan Control Server -> Fan Control Server: {
+  label: useInitialControlLogic(iterationCount < 100)
+  style: {
+    stroke: "#ca052b"
+    font-size: 24
+    stroke-dash: 2
+    animated: true
+  }
+}
+
+Fan Control Server -> Fan Control Server: {
+  label: predictFanSpeed(iterationCount >= 100)
+  style: {
+    stroke: "#167c3c"
+    animated: false
+    font-size: 24
+  }
+}
+
+Fan Control Server -> Fan Control Server: validateFanSpeed() {style.font-size: 24}
+
+Fan Control Server -> iDrac: sendFanSpeedCommand() {style.font-size: 24}
+iDrac -> Fans Module: changeFanSpeed() {style.font-size: 24}
+
+Fan Control Server -> iDrac: {
+  label: useFallbackLogic(iterationCount < 100 || !isValid)
+  style: {
+    stroke: "#ca052b"
+    stroke-dash: 5
+    font-size: 29
+    animated: true
+  }
+}
+Fan Control Server -> Data Storage: record data and write logs to file
+Data Storage -> Fan Control Server: Periodically train the model using stored data

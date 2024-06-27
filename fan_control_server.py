@@ -1,21 +1,21 @@
-import subprocess
-import sys
+import logging
 import os
 import pickle
-import logging
+import subprocess
+from datetime import datetime
+
 import numpy as np
 import pandas as pd
-from flask import Flask, request, jsonify
-from datetime import datetime
-from tensorflow.keras.models import load_model
 import tensorflow as tf
+from flask import Flask, jsonify, request
+from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
 
-IP_ADDRESS = "192.168.1.100"  # Replace with your IP address
-USERNAME = "root"             # Replace with your username
-PASSWORD = "001023"           # Replace with your password
+IP_ADDRESS = "10.10.10.10"  # Replace with your iDrac address
+USERNAME = "idaracusername"             # Replace with your username
+PASSWORD = "idracpassword"           # Replace with your password
 
 # Configuration files or environment variables should be used for these settings
 DATA_FILE = 'gpu_fan_data.csv'
@@ -125,7 +125,7 @@ def gpu_temperature():
 
     global model, iteration_count
     config = {
-        "address": IP_ADDRESS,  # These should be loaded securely
+        "address": IP_ADDRESS,
         "username": USERNAME,
         "password": PASSWORD
     }
