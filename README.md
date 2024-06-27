@@ -54,12 +54,12 @@
 
 Quiet Cool is a server application designed to control GPU fan speeds based on temperature readings. It dynamically adjusts fan speeds to optimize hardware performance and longevity. Below is a figure that shows how it works and you can find the live version [here](https://app.terrastruct.com/diagrams/1382878080). Source code for the figure is available [here](misc/quiet-cool/misc/diagram.d2).
 
-<iframe
-    title="quiet cool"
-    width="100%"
-    height="100%"
-    src="https://app.terrastruct.com/diagrams/1382878080">
-</iframe>
+<br />
+<p align="center">
+  <a href="https://github.com/tingrubato/quiet-cool">
+    <img src="misc/diagram.png" alt="Diagram" width="100%">
+  </a>
+</p>
 
 ## Disclaimer
 
